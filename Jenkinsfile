@@ -12,7 +12,7 @@ node
         git url: 'https://github.com/Ikram123-dev/Devops-POC.git'
     }
  
-        stages {
+    /*    stages {
 stage('Sonarqube') {
     environment {
         scannerHome = tool 'SonarQubeScanner'
@@ -27,7 +27,7 @@ stage('Sonarqube') {
     }
 }
         }
-        
+      */  
       
    
 
