@@ -12,22 +12,21 @@ node
         git url: 'https://github.com/Ikram123-dev/Devops-POC.git'
     }
  
-        //stages {
-          stage("build & SonarQube analysis") {
-            agent any
-            steps {
-              withSonarQubeEnv('sonar') {
-                sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://devops-poc.eastus.cloudapp.azure.com -Dsonar.login=a9c544923991c7e34db0e8df29b5cebe8563c6d4  -Dsonar.sources=. -Dsonar.tests=. -Dsonar.test.inclusions=**/test/java/servlet/createpage_junit.java -Dsonar.exclusions=**/test/java/servlet/createpage_junit.java'
-              }
-            }
-          }
-          stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-            }
-          }
+        stages {
+stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
+    }
+    steps {
+        withSonarQubeEnv('sonar') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
+        }
         
       
    
