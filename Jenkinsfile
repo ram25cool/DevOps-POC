@@ -8,7 +8,7 @@ node
     }
     stage('Static Code Analysis')
     {
-        echo "Static Code Analysis"  
+        echo "Static Code Analysis Done"  
         
         
      }
